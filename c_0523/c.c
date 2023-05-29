@@ -2,13 +2,13 @@
 #include<stdlib.h>
 //typedef int element;
 typedef struct {
-	char name[100];
+	char name[30];
 }element;
-typedef struct ListNode { // ³ëµå Å¸ÀÔÀ» ±¸Á¶Ã¼·Î Á¤ÀÇÇÑ´Ù. element data;
+typedef struct ListNode { // ë…¸ë“œ íƒ€ì…ì„ êµ¬ì¡°ì²´ë¡œ ì •ì˜í•œë‹¤. element data;
 	element data;
 	struct ListNode* link;
 } ListNode;
-ListNode* d_f;	// listÀÇ »çÀÌÁî
+ListNode* d_f;	// listì˜ ì‚¬ì´ì¦ˆ
 ListNode* insert_first(ListNode* head, element value)
 {
 	ListNode* p =
@@ -19,11 +19,11 @@ ListNode* insert_first(ListNode* head, element value)
 	head = p; //(4)
 	return head;
 }
-// pre°¡ °¡¸®Å°´Â ³ëµåÀÇ ´ÙÀ½ ³ëµå¸¦ »èÁ¦ÇÑ´Ù. 
+// preê°€ ê°€ë¦¬í‚¤ëŠ” ë…¸ë“œì˜ ë‹¤ìŒ ë…¸ë“œë¥¼ ì‚­ì œí•œë‹¤. 
 ListNode* delete(ListNode* head, ListNode* pre)
 {
 	ListNode* removed = pre->link;
-	d_f = insert_first(d_f, removed->data); //»èÁ¦¿ë ¸µÅ© »ğÀÔ
+	d_f = insert_first(d_f, removed->data); //ì‚­ì œìš© ë§í¬ ì‚½ì…
 	pre->link = removed->link; // (2)
 	free(removed); // (3)
 	return head; // (4)
@@ -79,7 +79,7 @@ ListNode* search_list(ListNode* head, char* x)
 		choice_Node = p;
 		p = p->link;
 	}
-	return NULL; // Å½»ö ½ÇÆĞ
+	return NULL; // íƒìƒ‰ ì‹¤íŒ¨
 }
 int main(void)
 {
@@ -89,39 +89,39 @@ int main(void)
 	head = push(head);
 	while (1) {
 		
-		printf("¸Ş´º\n 1)Ãß°¡\n 2)»èÁ¦\n 3)»èÁ¦µÈ °úÀÏ ¸ğµÎ Ãâ·Â\n 4)ÇÁ·Î±×·¥ Á¾·á\nÀÔ·ÂÇØ ÁÖ½Ê½Ã¿À: ");
-		int integer_number = 0; // »ğÀÔ ¼ıÀÚ
-		char fruit[30]; // ÀÔ·Â
+		printf("ë©”ë‰´\n 1)ì¶”ê°€\n 2)ì‚­ì œ\n 3)ì‚­ì œëœ ê³¼ì¼ ëª¨ë‘ ì¶œë ¥\n 4)í”„ë¡œê·¸ë¨ ì¢…ë£Œ\nì…ë ¥í•´ ì£¼ì‹­ì‹œì˜¤: ");
+		int integer_number = 0; // ì‚½ì… ìˆ«ì
+		char fruit[30]; // ì…ë ¥
 		scanf_s("%d", &integer_number);
 
 		switch (integer_number) {
 		case 1:
-			printf("Ãß°¡ÇÒ °úÀÏÀ» ÀÔ·ÂÇØ ÁÖ¼¼¿ä¿À : ");
+			printf("ì¶”ê°€í•  ê³¼ì¼ì„ ì…ë ¥í•´ ì£¼ì„¸ìš”ì˜¤ : ");
 			scanf_s("%s", fruit,30);
 			
-			if (search_list(head, fruit) != NULL) printf("ÀÌ¹Ì Á¸ÀçÇÏ´Â °úÀÏÀÔ´Ï´Ù. \n");
+			if (search_list(head, fruit) != NULL) printf("ì´ë¯¸ ì¡´ì¬í•˜ëŠ” ê³¼ì¼ì…ë‹ˆë‹¤. \n");
 			else {
 				strcpy(e.name, fruit);
 				head = insert_first(head, e);
-				printf("Ãß°¡µÇ¾ú½À´Ï´Ù. \n");
+				printf("ì¶”ê°€ë˜ì—ˆìŠµë‹ˆë‹¤. \n");
 			}
 			break;
 		case 2:
-			printf("¸®½ºÆ®¿¡¼­ »èÁ¦ÇÒ °úÀÏÀº ?! :");
+			printf("ë¦¬ìŠ¤íŠ¸ì—ì„œ ì‚­ì œí•  ê³¼ì¼ì€ ?! :");
 			scanf_s("%s", fruit,30);
 			ListNode* p = search_list(head, fruit);
 
 			if (p == NULL) 
-				printf("Á¸ÀçÇÏÁö ¾Ê´Â °úÀÏÀÔ´Ï´Ù. \n");
+				printf("ì¡´ì¬í•˜ì§€ ì•ŠëŠ” ê³¼ì¼ì…ë‹ˆë‹¤. \n");
 			else if (p == -1) 
 				head = first_delete(head);
 			else 
 				head = delete(head, p);
 			break;
 		case 3: print_list(head); break;
-		case 4: printf("ÇÁ·Î±×·¥ÀÌ Á¾·áµË´Ï´Ù. "); return 0;
+		case 4: printf("í”„ë¡œê·¸ë¨ì´ ì¢…ë£Œë©ë‹ˆë‹¤. "); return 0;
 		default:
-			printf("Àß¸øµÈ ÀÔ·Â°ªÀÔ´Ï´Ù.\n");
+			printf("ì˜ëª»ëœ ì…ë ¥ê°’ì…ë‹ˆë‹¤.\n");
 		}
 	}
 }
